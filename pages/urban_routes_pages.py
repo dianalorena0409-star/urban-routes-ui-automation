@@ -13,9 +13,8 @@ class UrbanRoutesPage:
     comfort_icon_assert = (By.CSS_SELECTOR, '.tcard.active .tcard-title')
     phone_input = (By.ID, 'phone')
     phone_button = (By.CLASS_NAME, "np-button")
-    phone_next_button = (By.CSS_SELECTOR,'.number-picker .section.active button[type="submit"].button.full')
     phone_code_input = (By.ID, 'code')
-    phone_confirm_button = (By.CSS_SELECTOR,'.number-picker .section.active button[type="submit"].button.full')
+    active_section_button = (By.CSS_SELECTOR,'.number-picker .section.active button[type="submit"].button.full')
     payment_method = (By.CLASS_NAME, 'pp-text')
     add_card = (By.XPATH,'//div[@class="pp-title" and text()="Agregar tarjeta"]')
     card_number = (By.ID, 'number')
@@ -33,6 +32,7 @@ class UrbanRoutesPage:
         '//div[@class="r-counter-label" and text()="Helado"]/following-sibling::div//div[@class="counter-value"]')
     order_taxi_button = (By.CLASS_NAME, "smart-button")
     order_modal = (By.CSS_SELECTOR, ".order.shown .order-header-title")
+    driver_rating = (By.CLASS_NAME, "order-btn-rating")
 
 
     def __init__(self, driver):
@@ -92,17 +92,14 @@ class UrbanRoutesPage:
     def get_phone_code(self):
         return self.driver.find_element(*self.phone_code_input).get_property("value")
 
-    def get_phone_confirm_button(self):
-        return self.wait.until(EC.element_to_be_clickable(self.phone_confirm_button))
-
-    def click_phone_confirm_button(self):
-        self.get_phone_confirm_button().click()
-
-    def get_phone_next_button(self):
-        return self.wait.until(EC.element_to_be_clickable(self.phone_next_button))
+    def get_phone_active_button(self):
+        return self.wait.until(EC.element_to_be_clickable(self.active_section_button))
 
     def click_phone_next_button(self):
-        self.get_phone_next_button().click()
+        self.get_phone_active_button().click()
+
+    def click_phone_confirm_button(self):
+        self.get_phone_active_button().click()
 
     def get_payment_method(self):
         return self.wait.until(EC.element_to_be_clickable(self.payment_method))
@@ -140,16 +137,16 @@ class UrbanRoutesPage:
         return self.driver.find_element(*self.message_for_driver).get_property("value")
 
     def click_blanket_and_tissues_switch(self):
-        self.driver.find_element(*self.blanket_and_tissues_switch).click()
+        self.wait.until(EC.element_to_be_clickable(self.blanket_and_tissues_switch)).click()
 
     def is_blanket_and_tissues_switch_selected(self):
-        return self.driver.find_element(*self.blanket_and_tissues_checkbox).is_selected()
+        return self.wait.until(EC.presence_of_element_located(self.blanket_and_tissues_checkbox)).is_selected()
 
     def add_ice_cream(self):
-        self.driver.find_element(*self.ice_cream_plus_button).click()
+        self.wait.until(EC.element_to_be_clickable(self.ice_cream_plus_button)).click()
 
     def get_ice_cream_count(self):
-        return self.driver.find_element(*self.ice_cream_counter).text
+        return self.wait.until(EC.presence_of_element_located(self.ice_cream_counter)).text
 
     def click_order_taxi_button(self):
         WebDriverWait(self.driver, 10).until(
@@ -160,5 +157,4 @@ class UrbanRoutesPage:
         return self.driver.find_element(*self.order_modal).text
 
     def get_driver_info(self):
-        WebDriverWait(self.driver, 50).until(EC.text_to_be_present_in_element(self.order_modal,"El conductor"))
-        return self.driver.find_element(*self.order_modal).text
+        return WebDriverWait(self.driver, 50).until(EC.visibility_of_element_located(self.driver_rating))

@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from pages.urban_routes_pages import UrbanRoutesPage
-from helpers.retrive_code import retrieve_phone_code
+from helpers.retrieve_code import retrieve_phone_code
 
 
 class TestUrbanRoutes:
@@ -114,7 +114,7 @@ class TestUrbanRoutes:
         self.routes_page.click_phone_confirm_button()
         self.routes_page.click_order_taxi_button()
         driver_info = self.routes_page.get_driver_info()
-        assert "El conductor" in driver_info
+        assert driver_info.is_displayed()
 
     def teardown_method(self):
         self.driver.quit()

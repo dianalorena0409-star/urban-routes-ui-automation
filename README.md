@@ -21,3 +21,12 @@ Las pruebas verifican diferentes funcionalidades relacionadas con la solicitud d
 3. Actualizar la URL de Urban Routes en el archivo `data.py` si es necesario.
 4. Abrir el archivo `test_urban_routes.py` ubicado en la carpeta `tests`.
 5. Ejecutar las pruebas utilizando el botón de ejecución de PyCharm.
+
+
+## Evidencias 
+Test 9 
+
+Test 9 es opcional. Durante la validacion la aplicacion devuelve un 500 `UnexpectedError` cuando se pide un taxi.
+lo que impide llegar al estado donde se muestra la información del conductor.
+
+!![Test 9 backend error](img.png)
