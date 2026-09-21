@@ -1,32 +1,57 @@
-# Proyecto de automatización de pruebas de Urban Routes
-## Descripción del proyecto
+# Urban Routes UI Test Automation
 
-Este proyecto consiste en la automatización de pruebas para la aplicación web Urban Routes.
-Las pruebas verifican diferentes funcionalidades relacionadas con la solicitud de un taxi, como establecer una ruta, seleccionar la tarifa Comfort, agregar un número de teléfono, agregar una tarjeta de crédito, escribir un mensaje para el conductor y seleccionar requisitos adicionales para el viaje.
+## Project Description
 
-## Tecnologías y técnicas utilizadas
+This project contains automated UI tests for the Urban Routes web application. The tests validate the main flow for requesting a taxi, including setting a route, selecting the Comfort tariff, adding a phone number and credit card, sending a message to the driver, selecting additional ride options, and requesting a taxi.
+
+The project uses the Page Object Model (POM) to separate page locators and interaction methods from the test scenarios.
+
+## Technologies and Techniques
 
 - Python
 - Pytest
 - Selenium WebDriver
-- PyCharm
 - Page Object Model (POM)
-- Localizadores CSS, XPath, ID y Class Name
-- Esperas explícitas con WebDriverWait
+- CSS, XPath, ID, and Class Name locators
+- Explicit waits with WebDriverWait
+- Automated assertions
 
-## Ejecución de las pruebas
+## Automated Test Scenarios
 
-1. Abrir el proyecto en PyCharm.
-2. Verificar que Selenium y Pytest estén instalados.
-3. Actualizar la URL de Urban Routes en el archivo `data.py` si es necesario.
-4. Abrir el archivo `test_urban_routes.py` ubicado en la carpeta `tests`.
-5. Ejecutar las pruebas utilizando el botón de ejecución de PyCharm.
+The project includes 9 automated test scenarios:
 
+1. Set the origin and destination route
+2. Select the Comfort tariff
+3. Add and confirm a phone number
+4. Add a credit card
+5. Add a message for the driver
+6. Select blankets and tissues
+7. Add two ice creams
+8. Request a taxi
+9. Verify that driver information is displayed
 
-## Evidencias 
-Test 9 
+## Project Structure
 
-Test 9 es opcional. Durante la validacion la aplicacion devuelve un 500 `UnexpectedError` cuando se pide un taxi.
-lo que impide llegar al estado donde se muestra la información del conductor.
+- `data/` – Test data and Urban Routes URL
+- `pages/` – Page Object Model locators and interaction methods
+- `tests/` – Automated test scenarios
+- `helpers/` – Helper provided for retrieving the phone confirmation code
+- `requirements.txt` – Project dependencies
+
+## Running the Tests
+
+1. Open the project in PyCharm.
+2. Install the dependencies listed in `requirements.txt`.
+3. Update the Urban Routes URL in `data/data.py` if necessary.
+4. Open `tests/test_urban_routes.py`.
+5. Run the tests using PyCharm.
+
+## Test 9 – Known Application Issue
+
+Test 9 verifies that driver information is displayed after requesting a taxi.
+
+During test execution, the application returned an HTTP 500 `UnexpectedError` when the taxi order was submitted. Because of this application error, the test could not reach the state where the driver information is displayed.
+
+The screenshot below shows the server response observed during testing:
 
 !![Test 9 backend error](img.png)

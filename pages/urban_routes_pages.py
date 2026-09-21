@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 class UrbanRoutesPage:
     from_field = (By.ID, 'from')
     to_field = (By.ID, 'to')
-    request_taxi_button = (By.CSS_SELECTOR,'.button.round')
+    request_taxi_button = (By.CSS_SELECTOR, '.button.round')
     comfort_icon = (By.XPATH, '//div[@class="tcard-title" and text()="Comfort"]')
     comfort_icon_assert = (By.CSS_SELECTOR, '.tcard.active .tcard-title')
     phone_input = (By.ID, 'phone')

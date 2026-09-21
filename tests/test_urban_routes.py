@@ -22,7 +22,7 @@ class TestUrbanRoutes:
         assert self.routes_page.get_from() == address_from
         assert self.routes_page.get_to() == address_to
 
-    def test_2_set_comfort_tariff(self):
+    def test_2_select_comfort_tariff(self):
         address_from = data.address_from
         address_to = data.address_to
         self.routes_page.set_route(address_from, address_to)
@@ -99,7 +99,7 @@ class TestUrbanRoutes:
         self.routes_page.click_order_taxi_button()
         assert self.routes_page.get_order_modal_text() == "Buscar automóvil"
 
-    def test_9_driver_info(self):
+    def test_9_display_driver_info(self):
         address_from = data.address_from
         address_to = data.address_to
         phone_number = data.phone_number
